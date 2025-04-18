@@ -77,9 +77,6 @@ public class LoginServiceImpl implements LoginService {
         //而且设置token需要给他提供一个前缀，提高可读性。
         redisUtils.set(Constants.LOGIN_ADMIN_INFO_TOKEN + token, JSONUtil.toJsonStr(loginAdmin),Constants.LOGIN_ADMIN_INFO_TOKEN_EXPIRE_TIME);
 
-
-
-
         Map<String,String> map = new HashMap<>();
         map.put("token",token);
         return map;

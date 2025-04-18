@@ -2,7 +2,6 @@ package com.zust.mallapi.mapper;
 
 import com.zust.mallapi.entity.Admin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zust.mallapi.entity.Admin;
 import org.springframework.stereotype.Repository;
 
 /**

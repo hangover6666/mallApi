@@ -180,4 +180,10 @@ public class RedisUtils {
 		return redisTemplate.opsForList().rightPush(key, value);
 	}
 
+
+	//检测是否包含给定的某个key
+	public boolean exists(String key){
+		return redisTemplate.hasKey(key);
+	}
+
 }

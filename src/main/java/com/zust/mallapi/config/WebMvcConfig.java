@@ -1,10 +1,13 @@
 package com.zust.mallapi.config;
 
+import com.zust.mallapi.interceptor.CheckTokenInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -16,6 +19,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
+    @Autowired
+    private CheckTokenInterceptor checkTokenInterceptor;
+
+
     //解决跨域问题：具体做法是对前端发来的请求做一个拦截，做一个处理
     @Bean
     public CorsFilter corsFilter() {
@@ -36,4 +44,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new CorsFilter(source);
     }
 
+
+    //配置拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(checkTokenInterceptor)
+                .addPathPatterns("/**")                          //配置拦截的请求
+                .excludePathPatterns("/captcha","/login");                          //配置不拦截的请求
+    }
 }

@@ -2,6 +2,7 @@ package com.zust.mallapi.advice;
 
 import com.zust.mallapi.common.Result;
 import com.zust.mallapi.exception.BusinessException;
+import com.zust.mallapi.exception.TokenException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -21,11 +22,17 @@ public class ExceptionHandlerAdvice {
     }
 
 
-
     //处理业务自己的异常
     @ExceptionHandler(BusinessException.class)
     public Result handler(BusinessException e){
         e.printStackTrace();
         return Result.fail(501,e.getMessage());
+    }
+
+    //处理token的异常
+    @ExceptionHandler(TokenException.class)
+    public Result handler(TokenException e){
+        e.printStackTrace();
+        return Result.fail(401,e.getMessage());
     }
 }

@@ -27,6 +27,8 @@ public class Result {
 
     public static Result success(String message,Object data){return new Result(200,message,data);}
 
+    public static Result success(String message){return new Result(200,message,null);}
+
     //请求失败的情况
     public static Result fail(int code,String message){
         return new Result(code,message,null);
@@ -35,4 +37,6 @@ public class Result {
     public static Result fail(){
         return new Result(500,"服务器异常",null);
     }
+
+
 }
